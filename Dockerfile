@@ -1,10 +1,7 @@
-FROM centos:7
-
-# Install Apache HTTP Server
-RUN yum install -y httpd
-
-# Expose port 80
+FROM ubuntu 
+RUN apt update 
+RUN apt install –y apache2 
+RUN apt install –y apache2-utils 
+RUN apt clean 
 EXPOSE 80
-
-# Start Apache HTTP Server in the foreground
-CMD ["httpd", "-D", "FOREGROUND"]
+CMD [“apache2ctl”, “-D”, “FOREGROUND”]
