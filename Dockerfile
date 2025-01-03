@@ -1,10 +1,15 @@
-# Example Dockerfile
-FROM ubuntu:20.04
+FROM centos:7
 
+# Set environment variable to suppress interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y apache2 && apt-get clean
+# Install Apache HTTP server
+RUN yum update -y && \
+    yum install -y httpd && \
+    yum clean all
 
+# Expose port 90
 EXPOSE 90
 
-CMD ["apachectl", "-D", "FOREGROUND"]
+# Command to run Apache in the foreground
+CMD ["httpd", "-D", "FOREGROUND"]
